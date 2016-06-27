@@ -1,0 +1,26 @@
+{
+  "name": "visited",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": "^1.4.8",
+    "angular-route": "^1.4.8",
+    "browserify-express": "^0.1.4",
+    "ejs": "~0.8.5",
+    "ejs-locals": "~1.0.2",
+    "express": "~4.11.2",
+    "forever": "^0.13.0",
+    "gulp": "^3.9.0",
+    "less-middleware": "^1.0.4"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "npm": "2.x",
+    "node": "0.10.x"
+  },
+  "devDependencies": {
+    "gulp-load-plugins": "^0.8.1",
+    "sw-precache": "^1.2.6"
+  }
+}
