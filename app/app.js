@@ -63,49 +63,15 @@ function initAutocomplete() {
     map.fitBounds(bounds);
   });
 
-var world_geometry = new google.maps.FusionTablesLayer({
-  query: {
-    select: 'geometry',
-    from: '1N2LBk4JHwWpOY4d9fobIn27lfnZ5MDy-NoqqRpk'
-  },
-  map: map,
-  suppressInfoWindows: true
-});
+  var world_geometry = new google.maps.FusionTablesLayer({
+    query: {
+      select: 'geometry',
+      from: '1N2LBk4JHwWpOY4d9fobIn27lfnZ5MDy-NoqqRpk'
+    },
+    map: map,
+    suppressInfoWindows: true
+  });
 
-  // Adds an info window on click with in a state that includes the state name and COLI
-  // stateLayer.addListener('click', function(e) {
-  //   console.log(e);
-  //   infoWindow.setContent('<div style="line-height:1.00;overflow:hidden;white-space:nowrap;">' +
-  //     e.feature.getProperty('NAME') + '<br> COLI: ' +
-  //     e.feature.getProperty('COLI') + '</div>');
-
-  //   var anchor = new google.maps.MVCObject();
-  //   anchor.set("position", e.latLng);
-  //   infoWindow.open(map, anchor);
-  // });
-
-
-  // Final step here sets the stateLayer GeoJSON data onto the map
-  stateLayer.setMap(map);
-
-}
-
-
-  // returns a color based on the value given when the function is called
-function getColor(coli) {
-  var colors = [
-    '#d1ccad',
-    '#c2c083',
-    '#cbd97c',
-    '#acd033',
-    '#89a844'
-  ];
-
-  return coli >= 121 ? colors[4] :
-    coli > 110 ? colors[3] :
-    coli > 102.5 ? colors[2] :
-    coli > 100 ? colors[1] :
-    colors[0];
 }
 
 
