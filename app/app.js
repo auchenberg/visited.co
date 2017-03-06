@@ -1,17 +1,25 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiYXVjaGVuYmVyZyIsImEiOiJjaWhtazd2b3QwMGY1dXNrcTd5N3V6NmM4In0.IjgFjyBRjdmUdi2MxSlw2w';
+
 var map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/auchenberg/ciq3detb8006icam106pxizsd',
+    style: 'mapbox://styles/mapbox/light-v9',
     center: [-68.13734351262877, 45.137451890638886],
     minZoom: 1,
     zoom: 1,
-    maxZoom: 5
+    maxZoom: 5,
 });
 
+    var geo  =new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken
+    });
+
+    map.addControl(geo);
+
 map.on('load', function () {
+
     map.addSource('countries', {
         'type': 'geojson',
-        'data': '/countries.geo.json'
+        'data': 'countries.geo.json'
     });
 
     map.addLayer({
@@ -32,7 +40,7 @@ map.on('load', function () {
         'layout': {},
         'paint': {
             'fill-color': '#627BC1',
-            'fill-opacity': 0.2
+            'fill-opacity': 0.1
         }
     });
 
@@ -55,19 +63,27 @@ map.on('load', function () {
         'layout': {},
         'paint': {
             'fill-color': '#f44336',
-            'fill-opacity': 0.5
+            'fill-opacity': 0.3
         },
-        'filter' : ["in", "ADMIN", ""]
+        'filter' : ["in", "name", ""]
     });
 
 
+    // Reset the state-fills-hover layer's filter when the mouse leaves the map
+    map.on("mouseout", function() {
+        map.setFilter("country-hover", ["==", "name", ""]);
+    });
 
-   map.on("mousemove", function(e) {
-        var features = map.queryRenderedFeatures(e.point, { layers: ["country-fills"] });
+    map.on("mousemove", function(e) {
+        var features = map.queryRenderedFeatures(e.point, { 
+            layers: ["country-fills"]
+        });
+
+
         if (features.length) {
-            map.setFilter("country-hover", ["==", "ADMIN", features[0].properties.ADMIN]);
+            map.setFilter("country-hover", ["==", "name", features[0].properties.name]);
         } else {
-            map.setFilter("country-hover", ["==", "ADMIN", ""]);
+            map.setFilter("country-hover", ["==", "name", ""]);
         }
     });    
 
@@ -77,7 +93,7 @@ map.on('load', function () {
 
       if (features.length) {
 
-        var currentCountry = features[0].properties.ADMIN
+        var currentCountry = features[0].properties.name
         var filter = map.getFilter("country-visited");
         var highlightedCountries;
 
@@ -98,7 +114,7 @@ map.on('load', function () {
           highlightedCountries = [currentCountry]
         }
 
-        map.setFilter("country-visited", ["in", "ADMIN"].concat(highlightedCountries));
+        map.setFilter("country-visited", ["in", "name"].concat(highlightedCountries));
       }
 
 

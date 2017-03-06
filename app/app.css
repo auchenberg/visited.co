@@ -17,28 +17,9 @@ html, body {
   z-index: 10;
 }
 
-.searchbox {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2),0 -1px 0px rgba(0,0,0,0.02); 
-  box-sizing: border-box;
-  width: 392px;
-  height: 48px;
-  border-bottom: 1px solid transparent;
-  padding: 12px 14px 12px 14px;  
-
-  position: absolute;
+.mapboxgl-ctrl-top-right {
+  right: auto;
   left: 0;
-  top: 0;
-  z-index: 10;
-
-  margin: 8px 0 8px 8px;
-}
-
-.searchbox input {
-  border: 0;
-  line-height: 24px;
-  font-size: 18px;
-  outline: 0;
 }
 
 .btn {
